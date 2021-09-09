@@ -1,10 +1,10 @@
 <?php
 require("dbconnect.php");
 
-$sql = "SELECT * FROM employees ORDER BY fname ASC";
+$empsearch = $_POST["empsearch"];
+$sql = "SELECT * FROM employees WHERE fname LIKE '%$empsearch%' ORDER BY fname ASC";
 $result = mysqli_query($connect,$sql);
 $order = 1;
-$count = mysqli_num_rows($result);
 
 ?>
 
@@ -21,7 +21,6 @@ $count = mysqli_num_rows($result);
    <div class="container">
       <h1 class="text-center">ข้อมูลพนักงานในฐานข้อมูล</h1>
       <hr>
-      <?php if($count > 0){ ?>
       <form action="searchData.php" method="post">
          <label for="">ค้นหาพนักงาน</label>
          <input type="text" class="form-control my-3" name="empsearch" placeholder="ป้อนข้อมูลพนักงาน">
@@ -62,18 +61,11 @@ $count = mysqli_num_rows($result);
             <?php } ?>
          </tbody>
       </table>
-      <?php }else{ ?>
-         <div class="alert alert-danger">
-            <b>ไม่มีข้อมูลพนักงาน</b>
-         </div>
-      <?php } ?>
       <a href="insertForm.php" class="btn btn-success">บันทึกข้อมูลพนักงาน</a>
-      <?php if($count > 0){ ?>
       <input type="submit" value="ลบข้อมูล(check)" onclick="return confirm('Are you sure')" class="btn btn-danger">
       </form>
       <button class="btn btn-primary" onclick="checkAll()">เลือกทั้งหมด</button>
       <button class="btn btn-warning" onclick="uncheckAll()">ยกเลิก</button>
-      <?php } ?>
    </div>
 </body>
 
