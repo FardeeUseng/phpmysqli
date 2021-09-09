@@ -1,3 +1,8 @@
+<?php
+require("dbconnect");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
